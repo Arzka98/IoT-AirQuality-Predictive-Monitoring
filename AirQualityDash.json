@@ -1,0 +1,24 @@
+[
+    {
+        "id": "9320926739d0a1e6",
+        "type": "function",
+        "z": "f24fe4ee6d9e76a1",
+        "name": "Tulkkaus MongoDB varten",
+        "func": "let d = msg.payload;\nif (typeof d === 'string') d = JSON.parse(d);\n\n\nif (d.CO2 === undefined) {\n    return null; \n}\n\n// Jos CO2 löytyi, jatketaan normaalisti:\nmsg.payload = {\n    \"aikaleima\": new Date(),\n    \"paikka\": \"simulaatio\",\n    \"henkilomaara\": d.pCount !== undefined ? d.pCount : 0,\n    \"co2\": d.CO2,\n    \"lampotila\": d.T,\n    \"kosteus\": d.H,\n    \"kastepiste\": d.DP\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 300,
+        "wires": [
+            [
+                "97b2b97b7d0e710b",
+                "9281d57f8cf901ab",
+                "37b7b82d934577ab"
+            ]
+        ]
+    }
+]
